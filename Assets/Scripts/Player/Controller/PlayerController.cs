@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputReader _inputReader;
 
     [SerializeField] private float speed;
-    [SerializeField] private float jumpSpeed;
 
     private Vector2 _moveDirection;
 
