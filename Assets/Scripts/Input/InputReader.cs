@@ -30,10 +30,13 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
     }
 
 
-    public event Action<Vector2> MoveEvent;
+    public event Action<Vector2> DirectionEvent;
 
     public event Action FireEvent;
     public event Action FireCancelEvent;
+
+    public event Action AccelerateEvent;
+    public event Action AccelerateCancelEvent;
 
 
     public void OnFire(InputAction.CallbackContext context)
@@ -50,8 +53,21 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnAccelerate(InputAction.CallbackContext context)
     {
-        MoveEvent?.Invoke(context.ReadValue<Vector2>());
+        if (context.phase == InputActionPhase.Performed)
+        {
+            AccelerateEvent?.Invoke();
+        }
+
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            AccelerateCancelEvent?.Invoke();
+        }
+    }
+
+    public void OnDirection(InputAction.CallbackContext context)
+    {
+        DirectionEvent?.Invoke(context.ReadValue<Vector2>());
     }
 }

@@ -30,7 +30,7 @@ namespace NoiceOneGames
             ""id"": ""e0934958-4902-40e9-b3f4-2b497c17694a"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""Direction"",
                     ""type"": ""Value"",
                     ""id"": ""f99584ed-ef2b-46ef-ad17-084aa465bd55"",
                     ""expectedControlType"": ""Vector2"",
@@ -46,6 +46,15 @@ namespace NoiceOneGames
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Accelerate"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e4022ee-0ed1-4593-a556-89370dad0189"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -56,7 +65,7 @@ namespace NoiceOneGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Direction"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -67,7 +76,7 @@ namespace NoiceOneGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -78,7 +87,7 @@ namespace NoiceOneGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -89,7 +98,7 @@ namespace NoiceOneGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -100,7 +109,7 @@ namespace NoiceOneGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -111,7 +120,7 @@ namespace NoiceOneGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Direction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -129,11 +138,33 @@ namespace NoiceOneGames
                 {
                     ""name"": """",
                     ""id"": ""fef58e69-0e78-4fca-9cf9-9bbc986a2da0"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79cd0b07-d52c-4e73-9ea7-5f85dce5214a"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51ebc8b5-c2f6-47e6-9ec5-dd976e532ac6"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -144,8 +175,9 @@ namespace NoiceOneGames
 }");
             // Gameplay
             m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-            m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+            m_Gameplay_Direction = m_Gameplay.FindAction("Direction", throwIfNotFound: true);
             m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
+            m_Gameplay_Accelerate = m_Gameplay.FindAction("Accelerate", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -207,14 +239,16 @@ namespace NoiceOneGames
         // Gameplay
         private readonly InputActionMap m_Gameplay;
         private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-        private readonly InputAction m_Gameplay_Move;
+        private readonly InputAction m_Gameplay_Direction;
         private readonly InputAction m_Gameplay_Fire;
+        private readonly InputAction m_Gameplay_Accelerate;
         public struct GameplayActions
         {
             private @GameInput m_Wrapper;
             public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+            public InputAction @Direction => m_Wrapper.m_Gameplay_Direction;
             public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
+            public InputAction @Accelerate => m_Wrapper.m_Gameplay_Accelerate;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -224,22 +258,28 @@ namespace NoiceOneGames
             {
                 if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
+                @Direction.started += instance.OnDirection;
+                @Direction.performed += instance.OnDirection;
+                @Direction.canceled += instance.OnDirection;
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Accelerate.started += instance.OnAccelerate;
+                @Accelerate.performed += instance.OnAccelerate;
+                @Accelerate.canceled += instance.OnAccelerate;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
             {
-                @Move.started -= instance.OnMove;
-                @Move.performed -= instance.OnMove;
-                @Move.canceled -= instance.OnMove;
+                @Direction.started -= instance.OnDirection;
+                @Direction.performed -= instance.OnDirection;
+                @Direction.canceled -= instance.OnDirection;
                 @Fire.started -= instance.OnFire;
                 @Fire.performed -= instance.OnFire;
                 @Fire.canceled -= instance.OnFire;
+                @Accelerate.started -= instance.OnAccelerate;
+                @Accelerate.performed -= instance.OnAccelerate;
+                @Accelerate.canceled -= instance.OnAccelerate;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -259,8 +299,9 @@ namespace NoiceOneGames
         public GameplayActions @Gameplay => new GameplayActions(this);
         public interface IGameplayActions
         {
-            void OnMove(InputAction.CallbackContext context);
+            void OnDirection(InputAction.CallbackContext context);
             void OnFire(InputAction.CallbackContext context);
+            void OnAccelerate(InputAction.CallbackContext context);
         }
     }
 }

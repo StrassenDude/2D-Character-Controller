@@ -13,26 +13,38 @@ public class PlayerController : MonoBehaviour
 
     private bool _isFireing;
 
+    [SerializeField] private bool _isAccelerating;
+
+    public Rigidbody2D _rigidbody;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        _inputReader.MoveEvent += HandleMove;
+        _inputReader.DirectionEvent += HandleDirection;
 
         _inputReader.FireEvent += HandleFire;
         _inputReader.FireCancelEvent += HandleCancelFire;
+
+        _inputReader.AccelerateEvent += HandleAcceleration;
+        _inputReader.AccelerateCancelEvent += HandleCancelAcceleration;
+    }
+
+    void FixedUpdate()
+    {
+        ApplyEngineForce();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        
         Fire();
         
     }
 
 
-    private void HandleMove(Vector2 dir)
+    private void HandleDirection(Vector2 dir)
     {
         _moveDirection = dir;
     }
@@ -42,19 +54,32 @@ public class PlayerController : MonoBehaviour
         _isFireing = true;
     }
 
+    private void HandleAcceleration()
+    {
+        _isAccelerating = true;
+    }
+
+    private void HandleCancelAcceleration()
+    {
+        _isAccelerating = false;
+    }
+
     private void HandleCancelFire()
     {
         _isFireing = false;
     }
 
-    private void Move()
-    {
-        if(_moveDirection == Vector2.zero)
-        {
-            return;
-        }
 
-        transform.position += new Vector3(_moveDirection.x, _moveDirection.y, 0) * (speed * Time.deltaTime);
+
+    private void Accelerate()
+    {
+
+    }
+
+
+    private void ApplyEngineForce()
+    {
+        
     }
 
 

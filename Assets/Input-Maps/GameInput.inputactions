@@ -6,7 +6,7 @@
             "id": "e0934958-4902-40e9-b3f4-2b497c17694a",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "Direction",
                     "type": "Value",
                     "id": "f99584ed-ef2b-46ef-ad17-084aa465bd55",
                     "expectedControlType": "Vector2",
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Accelerate",
+                    "type": "Button",
+                    "id": "9e4022ee-0ed1-4593-a556-89370dad0189",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -32,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Direction",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -54,7 +63,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -65,7 +74,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -76,7 +85,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -87,7 +96,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -105,11 +114,33 @@
                 {
                     "name": "",
                     "id": "fef58e69-0e78-4fca-9cf9-9bbc986a2da0",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79cd0b07-d52c-4e73-9ea7-5f85dce5214a",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51ebc8b5-c2f6-47e6-9ec5-dd976e532ac6",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
