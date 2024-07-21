@@ -327,7 +327,7 @@ MonoBehaviour:
   setAccelerationFactor: 20
   maxSpeed: 10
   turnFactor: 3.5
-  driftFactor: 0.4
+  driftFactor: 0.5
   _isFireing: 0
   _isAccelerating: 0
   _rigidbody: {fileID: 263696188}
