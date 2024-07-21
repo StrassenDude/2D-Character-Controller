@@ -36,7 +36,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
     public event Action FireCancelEvent;
 
     public event Action AccelerateEvent;
-    public event Action AccelerateCancelEvent;
 
 
     public void OnFire(InputAction.CallbackContext context)
@@ -58,11 +57,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
         if (context.phase == InputActionPhase.Performed)
         {
             AccelerateEvent?.Invoke();
-        }
-
-        if (context.phase == InputActionPhase.Canceled)
-        {
-            AccelerateCancelEvent?.Invoke();
         }
     }
 

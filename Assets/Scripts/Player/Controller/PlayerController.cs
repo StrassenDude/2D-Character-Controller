@@ -5,17 +5,33 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private InputReader _inputReader;
+    [Header("Plane Settings")]
+    [SerializeField] private float setAccelerationFactor;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float turnFactor;
+    [SerializeField] private float driftFactor;
 
-    [SerializeField] private float speed;
-
-    private Vector2 _moveDirection;
-
-    private bool _isFireing;
-
+    [SerializeField] private bool _isFireing;
     [SerializeField] private bool _isAccelerating;
 
+
+    [Header("RigidBody2D")]
     public Rigidbody2D _rigidbody;
+
+
+    [Header("Input Reader")]
+    [SerializeField] private InputReader _inputReader;
+
+
+    //Lokale Variablen
+    private float accelerationInput = 0;
+    private float steeringInput;
+    private float accelerationFactor;
+
+    private float rotationAngle = 0;
+    private float velocityVsUp = 0;
+
+    private Vector2 _moveDirection;
 
 
     // Start is called before the first frame update
@@ -27,20 +43,20 @@ public class PlayerController : MonoBehaviour
         _inputReader.FireCancelEvent += HandleCancelFire;
 
         _inputReader.AccelerateEvent += HandleAcceleration;
-        _inputReader.AccelerateCancelEvent += HandleCancelAcceleration;
     }
 
     void FixedUpdate()
     {
         ApplyEngineForce();
+        ApplySteering();
+        KillOrthogonalVelocity();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        HandleEngine();
         Fire();
-        
     }
 
 
@@ -54,32 +70,62 @@ public class PlayerController : MonoBehaviour
         _isFireing = true;
     }
 
-    private void HandleAcceleration()
-    {
-        _isAccelerating = true;
-    }
-
-    private void HandleCancelAcceleration()
-    {
-        _isAccelerating = false;
-    }
-
     private void HandleCancelFire()
     {
         _isFireing = false;
     }
-
-
-
-    private void Accelerate()
+    private void HandleAcceleration()
     {
-
+        _isAccelerating = !_isAccelerating;
     }
 
 
+
+    private void HandleEngine()
+    {
+        if (_isAccelerating)
+        {
+            accelerationFactor = setAccelerationFactor;
+        }
+        else if (!_isAccelerating)
+        {
+            accelerationFactor = 0;
+        }
+    }
+
     private void ApplyEngineForce()
     {
-        
+        velocityVsUp = Vector2.Dot(transform.up, _rigidbody.velocity);
+
+        //limit that we cannot go faster than max speed in "forward" direction
+        if (velocityVsUp > maxSpeed && _isAccelerating)
+        {
+            return;
+        }
+
+
+        Vector2 engineForceVector = transform.up * accelerationFactor;
+
+        _rigidbody.AddForce(engineForceVector, ForceMode2D.Force);
+
+    }
+
+    private void ApplySteering()
+    {
+        steeringInput = _moveDirection.x;
+
+        rotationAngle -= steeringInput * turnFactor;
+
+        _rigidbody.MoveRotation(rotationAngle);
+    }
+
+
+    private void KillOrthogonalVelocity()
+    {
+        Vector2 forwardVelocity = transform.up * Vector2.Dot(_rigidbody.velocity, transform.up);
+        Vector2 rightVelocity = transform.right * Vector2.Dot(_rigidbody.velocity, transform.right);
+
+        _rigidbody.velocity = forwardVelocity + rightVelocity * driftFactor;
     }
 
 
