@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
 
 
     //Lokale Variablen
-    private float accelerationInput = 0;
     private float steeringInput;
     private float accelerationFactor;
 
