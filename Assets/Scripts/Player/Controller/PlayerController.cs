@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float setAccelerationFactor;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float turnFactor;
-    [SerializeField] private float driftFactor;
+    [SerializeField] private float driftFactorWithEngine;
+    [SerializeField] private float driftFactorNoEngine;
+    [SerializeField] private float dragFactor;
 
     [SerializeField] private bool _isFireing;
     [SerializeField] private bool _isAccelerating;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     //Lokale Variablen
     private float steeringInput;
     private float accelerationFactor;
+    private float driftFactor;
 
     private float rotationAngle = 0;
     private float velocityVsUp = 0;
@@ -85,16 +88,31 @@ public class PlayerController : MonoBehaviour
         if (_isAccelerating)
         {
             accelerationFactor = setAccelerationFactor;
+            driftFactor = driftFactorWithEngine;
         }
         else if (!_isAccelerating)
         {
             accelerationFactor = 0;
+            driftFactor = driftFactorNoEngine;
         }
     }
 
     private void ApplyEngineForce()
     {
+        // Calcutates how much "forword" the plane is going in terms of direction of our velocity
         velocityVsUp = Vector2.Dot(transform.up, _rigidbody.velocity);
+
+        // Applies Drag when Acceleration is not pressed and slows down vehicle
+        if (accelerationFactor == 0)
+        {
+            _rigidbody.drag = Mathf.Lerp(_rigidbody.drag, dragFactor, Time.fixedDeltaTime * 3);
+        }
+        else
+        {
+            _rigidbody.drag = 0;
+        }
+
+        // 
 
         //limit that we cannot go faster than max speed in "forward" direction
         if (velocityVsUp > maxSpeed && _isAccelerating)
@@ -102,19 +120,23 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-
+        // Creates Force with the engine
         Vector2 engineForceVector = transform.up * accelerationFactor;
 
+        // Applies Force and pushes the plane forware
         _rigidbody.AddForce(engineForceVector, ForceMode2D.Force);
 
     }
+
 
     private void ApplySteering()
     {
         steeringInput = _moveDirection.x;
 
+        // Updates Rotation Angle based on Input
         rotationAngle -= steeringInput * turnFactor;
 
+        // Apply steering by rotating Plane Object
         _rigidbody.MoveRotation(rotationAngle);
     }
 

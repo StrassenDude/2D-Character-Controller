@@ -324,10 +324,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99bd74b8d4654a45917a94bd03bab1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setAccelerationFactor: 17
-  maxSpeed: 10
+  setAccelerationFactor: 20
+  maxSpeed: 12
   turnFactor: 3.5
-  driftFactor: 0.5
+  driftFactorWithEngine: 0.5
+  driftFactorNoEngine: 0.95
+  dragFactor: 0.5
   _isFireing: 0
   _isAccelerating: 0
   _rigidbody: {fileID: 263696188}
