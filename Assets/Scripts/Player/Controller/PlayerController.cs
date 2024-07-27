@@ -52,12 +52,13 @@ public class PlayerController : MonoBehaviour
         ApplyEngineForce();
         ApplySteering();
         KillOrthogonalVelocity();
+        HandleEngine();
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleEngine();
+        
         Fire();
     }
 
@@ -131,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
     private void ApplySteering()
     {
-        steeringInput = _moveDirection.x;
+        steeringInput = _moveDirection.y;
 
         // Updates Rotation Angle based on Input
         rotationAngle -= steeringInput * turnFactor;
