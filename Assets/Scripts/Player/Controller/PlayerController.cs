@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     [Header("RigidBody2D")]
     public Rigidbody2D _rigidbody;
 
+    [Header("TrailRenderer")]
+    public TrailRenderer _trailRenderer;
+
+    [Header("ParticleSystem")]
+    public ParticleSystem _particleSystem;
 
     [Header("Input Reader")]
     [SerializeField] private InputReader _inputReader;
@@ -92,11 +97,14 @@ public class PlayerController : MonoBehaviour
         {
             accelerationFactor = setAccelerationFactor;
             driftFactor = driftFactorWithEngine;
+            _trailRenderer.emitting = true;
+            _particleSystem.Play();
         }
         else if (!_isAccelerating)
         {
             accelerationFactor = 0;
             driftFactor = driftFactorNoEngine;
+            _trailRenderer.emitting = false;
         }
     }
 
@@ -149,7 +157,6 @@ public class PlayerController : MonoBehaviour
 
         _rigidbody.velocity = forwardVelocity + rightVelocity * driftFactor;
     }
-
 
     private void ApplyGravity()
     {
