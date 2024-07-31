@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float driftFactorWithEngine;
     [SerializeField] private float driftFactorNoEngine;
     [SerializeField] private float dragFactor;
+    [SerializeField] private float gravityFactor;
 
     [SerializeField] private bool _isFireing;
     [SerializeField] private bool _isAccelerating;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
         ApplySteering();
         KillOrthogonalVelocity();
         HandleEngine();
+        ApplyGravity();
     }
 
     // Update is called once per frame
@@ -113,8 +115,6 @@ public class PlayerController : MonoBehaviour
             _rigidbody.drag = 0;
         }
 
-        // 
-
         //limit that we cannot go faster than max speed in "forward" direction
         if (velocityVsUp > maxSpeed && _isAccelerating)
         {
@@ -148,6 +148,22 @@ public class PlayerController : MonoBehaviour
         Vector2 rightVelocity = transform.right * Vector2.Dot(_rigidbody.velocity, transform.right);
 
         _rigidbody.velocity = forwardVelocity + rightVelocity * driftFactor;
+    }
+
+
+    private void ApplyGravity()
+    {
+        if (!_isAccelerating)
+        {
+            StartCoroutine(CalculateGravity());
+        }
+        else _rigidbody.gravityScale = 0;
+    }
+
+    IEnumerator CalculateGravity()
+    {
+        yield return new WaitForSeconds(0.8f);
+        _rigidbody.gravityScale = Mathf.Lerp(_rigidbody.gravityScale, gravityFactor, Time.fixedDeltaTime * 3);
     }
 
 
