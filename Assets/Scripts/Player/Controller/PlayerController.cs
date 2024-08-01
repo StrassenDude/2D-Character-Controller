@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HandleSmoke();
         Fire();
     }
 
@@ -90,6 +90,20 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void HandleSmoke()
+    {
+        if (_isAccelerating)
+        {
+            _trailRenderer.emitting = true;
+            _particleSystem.Play();
+        }
+        else if (!_isAccelerating)
+        {
+            _trailRenderer.emitting = false;
+        }
+    }
+
+
 
     private void HandleEngine()
     {
@@ -97,14 +111,11 @@ public class PlayerController : MonoBehaviour
         {
             accelerationFactor = setAccelerationFactor;
             driftFactor = driftFactorWithEngine;
-            _trailRenderer.emitting = true;
-            _particleSystem.Play();
         }
         else if (!_isAccelerating)
         {
             accelerationFactor = 0;
             driftFactor = driftFactorNoEngine;
-            _trailRenderer.emitting = false;
         }
     }
 
