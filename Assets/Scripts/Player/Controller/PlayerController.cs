@@ -27,11 +27,17 @@ public class PlayerController : MonoBehaviour
     [Header("ParticleSystem")]
     public ParticleSystem _particleSystem;
 
+    [Header("Weapon")]
+    public GameObject _weapon;
+    public Transform _weaponTransform;
+
     [Header("Input Reader")]
     [SerializeField] private InputReader _inputReader;
 
 
     //Lokale Variablen
+    private GameObject _weaponInst;
+
     private float steeringInput;
     private float accelerationFactor;
     private float driftFactor;
@@ -95,11 +101,15 @@ public class PlayerController : MonoBehaviour
         if (_isAccelerating)
         {
             _trailRenderer.emitting = true;
-            _particleSystem.Play();
         }
         else if (!_isAccelerating)
         {
             _trailRenderer.emitting = false;
+        }
+
+        if (_isAccelerating && accelerationFactor == 0)
+        {
+            _particleSystem.Play();
         }
     }
 
@@ -189,7 +199,8 @@ public class PlayerController : MonoBehaviour
     {
         if (_isFireing)
         {
-            Debug.Log("Fire");
+            _weaponInst = Instantiate(_weapon, _weaponTransform.position, _weaponTransform.rotation);
+            _isFireing = false;
         }
     }
 }
