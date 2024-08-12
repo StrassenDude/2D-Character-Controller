@@ -667,6 +667,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 192934025}
+    - target: {fileID: 8284462321977222399, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8961413338033176332, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
       propertyPath: m_Name
       value: Character

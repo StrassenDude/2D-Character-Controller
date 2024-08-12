@@ -7,26 +7,18 @@ public class Character : MonoBehaviour, IDamagable, ICharacterMovable
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
 
-    private void Start()
-    {
-        CurrentHealth  = MaxHealth;
+    public Rigidbody2D rb { get; set; }
 
-        StateMachine.Initialize(FlyingState);
-
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void Update()
-    {
-        StateMachine.CurrentCharacterState.FrameUpdate();
-    }
-
-    private void FixedUpdate()
-    {
-        StateMachine.CurrentCharacterState.PhysicsUpdate();
-    }
 
     #region State Machine Variables
+
+    public CharacterStateMachine StateMachine { get; set; }
+
+    public CharacterFlyingState FlyingState { get; set; }
+    public CharacterShootingState ShootingState { get; set; }
+    public CharacterDashingState DashingState { get; set; }
+    public CharacterOnWaterState OnWaterState { get; set; }
+    #endregion
 
 
     private void Awake()
@@ -39,20 +31,23 @@ public class Character : MonoBehaviour, IDamagable, ICharacterMovable
         OnWaterState = new CharacterOnWaterState(this, StateMachine);
     }
 
+    private void Start()
+    {
+        CurrentHealth = MaxHealth;
 
-    public CharacterStateMachine StateMachine { get; set; }
+        StateMachine.Initialize(FlyingState);
 
-    public CharacterFlyingState FlyingState { get; set; }
-    public CharacterShootingState ShootingState { get; set; }
-    public CharacterDashingState DashingState { get; set; }
-    public CharacterOnWaterState OnWaterState { get; set; }
-   
+        rb = GetComponent<Rigidbody2D>();
+    }
+    private void Update()
+    {
+        StateMachine.CurrentCharacterState.FrameUpdate();
+    }
 
-
-
-    #endregion
-
-    
+    private void FixedUpdate()
+    {
+        StateMachine.CurrentCharacterState.PhysicsUpdate();
+    }
 
     #region Health/Die Functions
     public void Damage(float damgeAmaount)
@@ -74,7 +69,6 @@ public class Character : MonoBehaviour, IDamagable, ICharacterMovable
 
     #region Check Movement
 
-    public Rigidbody2D rb { get; set; }
 
 
     public void MoveCharacter()

@@ -28,6 +28,8 @@ public class CharacterFlyingState : CharacterState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+
+        Debug.Log("hallo2");
     }
 
     public override void PhysicsUpdate()
