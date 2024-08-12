@@ -34,7 +34,6 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 
     public event Action FireEvent;
     public event Action FireCancelEvent;
-
     public event Action AccelerateEvent;
 
 
