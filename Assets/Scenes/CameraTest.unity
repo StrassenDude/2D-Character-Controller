@@ -614,6 +614,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 449532745}
+    - target: {fileID: 6452395580034569722, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
+      propertyPath: _primaryWeaponTransform
+      value: 
+      objectReference: {fileID: 911049247}
     - target: {fileID: 6657874861252130139, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -667,6 +671,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
+--- !u!4 &911049247 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4412719747437146356, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
+  m_PrefabInstance: {fileID: 676069401}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1098797521
 GameObject:
   m_ObjectHideFlags: 0
