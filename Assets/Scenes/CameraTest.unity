@@ -602,11 +602,6 @@ Material:
     - _Shape3Color: {r: 1, g: 1, b: 1, a: 1}
     - _ShapeColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!1 &591534935 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8961413338033176332, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
-  m_PrefabInstance: {fileID: 676069401}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &676069401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -619,10 +614,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 449532745}
-    - target: {fileID: 6452395580034569722, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6657874861252130139, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -667,10 +658,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 192934025}
-    - target: {fileID: 8284462321977222399, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8961413338033176332, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
       propertyPath: m_Name
       value: Character
@@ -678,10 +665,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8961413338033176332, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1586095522}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
 --- !u!1 &1098797521
 GameObject:
@@ -904,19 +888,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6657874861252130139, guid: 1b3eb7d4aeb228a4c870ded38a655ded, type: 3}
   m_PrefabInstance: {fileID: 676069401}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1586095522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 591534935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c777e8a8a7645a64ba8c289ee427fb5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
