@@ -241,10 +241,10 @@ Material:
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 0.56289303, g: 0.8765513, b: 1, a: 1}
+    - _GlowColor: {r: 1, g: 0.66352195, b: 0.6758698, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _Shape2Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Shape3Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ShapeColor: {r: 0.61320746, g: 0.8390763, b: 1, a: 1}
+    - _ShapeColor: {r: 0.8616352, g: 0.08674525, b: 0.083995745, a: 1}
   m_BuildTextureStacks: []

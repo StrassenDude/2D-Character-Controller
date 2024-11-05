@@ -5201,7 +5201,7 @@ MonoBehaviour:
       m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    m_ColorMin: {r: 9.1835e-41, g: 0, b: 1.6299464e-22, a: 2.0815e-41}
+    m_ColorMin: {r: 1.01633e-40, g: 9.1e-43, b: 3.174345e-24, a: 6.635e-42}
     m_ColorMax: {r: 1, g: 1, b: 1, a: 1}
   isBurst: 1
   minNumberOfParticles: 88
@@ -5304,9 +5304,10 @@ GameObject:
   - component: {fileID: 6657874861252130139}
   - component: {fileID: 6452395580034569722}
   - component: {fileID: 8284462321977222399}
+  - component: {fileID: 2159342019275659108}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5353,6 +5354,7 @@ MonoBehaviour:
   _isFireing: 0
   _isAccelerating: 1
   _primaryWeapon: {fileID: 11400000, guid: 1d74c3c545406b4419f5e5c8ada40b19, type: 2}
+  _primaryWeaponTransform: {fileID: 4412719747437146356}
   _rigidbody: {fileID: 8284462321977222399}
   _trailRenderer: {fileID: 7526792876376421397}
   _particleSystem: {fileID: 8932812053712077089}
@@ -5384,3 +5386,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!70 &2159342019275659108
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961413338033176332}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.060312152, y: -0.010051966}
+  m_Size: {x: 1.0227098, y: 2.5681338}
+  m_Direction: 0
