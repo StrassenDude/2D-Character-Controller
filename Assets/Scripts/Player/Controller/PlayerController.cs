@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,8 @@ public class PlayerController : MonoBehaviour
     [Header("Plane Settings")]
     [SerializeField] private float setAccelerationFactor;
     [SerializeField] private float maxSpeed;
-    [SerializeField] private float turnFactor;
+    [SerializeField] private float turnFactorWithEngine;
+    [SerializeField] private float turnFactorNoEngine;
     [SerializeField] private float driftFactorWithEngine;
     [SerializeField] private float driftFactorNoEngine;
     [SerializeField] private float dragFactor;
@@ -16,6 +18,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private bool _isFireing;
     [SerializeField] private bool _isAccelerating;
+
+    [SerializeField] private PrimaryWeapon _primaryWeapon;
+
+    public Transform _primaryWeaponTransform;
 
 
     [Header("RigidBody2D")]
@@ -27,17 +33,14 @@ public class PlayerController : MonoBehaviour
     [Header("ParticleSystem")]
     public ParticleSystem _particleSystem;
 
-    [Header("Weapon")]
-    public GameObject _weapon;
-    public Transform _weaponTransform;
-
     [Header("Input Reader")]
     [SerializeField] private InputReader _inputReader;
 
 
     //Lokale Variablen
-    private GameObject _weaponInst;
+   
 
+    private float turnFactor;
     private float steeringInput;
     private float accelerationFactor;
     private float driftFactor;
@@ -121,11 +124,13 @@ public class PlayerController : MonoBehaviour
         {
             accelerationFactor = setAccelerationFactor;
             driftFactor = driftFactorWithEngine;
+            turnFactor = turnFactorWithEngine;
         }
         else if (!_isAccelerating)
         {
             accelerationFactor = 0;
             driftFactor = driftFactorNoEngine;
+            turnFactor = turnFactorNoEngine;
         }
     }
 
@@ -199,7 +204,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isFireing)
         {
-            _weaponInst = Instantiate(_weapon, _weaponTransform.position, _weaponTransform.rotation);
+            _primaryWeapon.Fire(_primaryWeaponTransform);
             _isFireing = false;
         }
     }

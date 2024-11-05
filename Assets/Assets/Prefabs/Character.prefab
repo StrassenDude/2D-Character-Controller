@@ -5344,18 +5344,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setAccelerationFactor: 20
   maxSpeed: 10
-  turnFactor: 3.5
+  turnFactorWithEngine: 3.5
+  turnFactorNoEngine: 5
   driftFactorWithEngine: 0.5
   driftFactorNoEngine: 0.95
   dragFactor: 0.2
   gravityFactor: 1.5
   _isFireing: 0
   _isAccelerating: 1
+  _primaryWeapon: {fileID: 11400000, guid: 1d74c3c545406b4419f5e5c8ada40b19, type: 2}
   _rigidbody: {fileID: 8284462321977222399}
   _trailRenderer: {fileID: 7526792876376421397}
   _particleSystem: {fileID: 8932812053712077089}
-  _weapon: {fileID: 7935880121395660807, guid: c0edccbe25fb1e64181e2565fe87a213, type: 3}
-  _weaponTransform: {fileID: 4412719747437146356}
   _inputReader: {fileID: 11400000, guid: d98e97eebaeeaf74fb53b7a2049947c0, type: 2}
 --- !u!50 &8284462321977222399
 Rigidbody2D:
@@ -5372,7 +5372,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.1
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
